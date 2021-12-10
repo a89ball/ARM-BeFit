@@ -1,5 +1,5 @@
 const User = require('./user')
-const Workout = require ('./workout')
+const Workout = require ('./exercise')
 const Exercise = require('./exercise')
 
 
