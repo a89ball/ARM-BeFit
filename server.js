@@ -21,7 +21,7 @@ const sess = {
         db: sequelize
     }),
 
-    
+
 };
 app.use(session(sess));
 app.set('view engine', 'hbs');
@@ -55,6 +55,6 @@ sequelize.sync({ force: true }).then(() => {
 //date-fns
 const formatDate = (date, formatStyle, locale) => {
     return format(date, formatStyle, {
-      locale: getLocale(locale),
+        locale: getLocale(locale),
     })
-  }
+}
