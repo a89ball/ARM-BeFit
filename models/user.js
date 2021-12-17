@@ -1,6 +1,6 @@
 const { DataTypes, Model } = require('sequelize')
-const bycrpt = require('bycrpt')
-const sequelize = require('../config/db')
+const bcrypt = require('bcrypt')
+const sequelize = require('../config/connection')
 
 class User extends Model {
     validatePassword(password) {
@@ -47,17 +47,18 @@ User.init({
 },
     {
         hooks: {
-            beforeCreate: aysnc(newUserData => {
-                newUserData.password = await bycrpt.hash(newUserData.password, 10)
+            beforeCreate: async(newUserData) => {
+                newUserData.password = await bcrypt.hash(newUserData.password, 10)
                 return newUserData
-            }),
-            beforeUpdate: aysnc(updatedUserData => {
-                updatedUserData.password = await bycrpt.hash(updatedUserData.password, 10)
+            },
+            beforeUpdate: async(updatedUserData) => {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10)
                 return updatedUserData
-            }),
-
+            },
         },
         sequelize, modelName: 'User'
 
     })
 module.exports = User
+
+
